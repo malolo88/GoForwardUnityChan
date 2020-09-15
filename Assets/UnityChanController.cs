@@ -21,7 +21,10 @@ public class UnityChanController : MonoBehaviour
 
     //ゲームオーバーになる位置
     private float deadLine = -9;
-    
+
+    // おふだのPrefab
+    public GameObject amuletPrefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,29 +48,35 @@ public class UnityChanController : MonoBehaviour
         GetComponent<AudioSource>().volume = (isGround) ? 1 : 0;
 
         //着地状態でクリックされた場合
-        if(Input.GetMouseButtonDown(0) && isGround)
+        if (Input.GetMouseButtonDown(0) && isGround)
         {
             //上方向の力をかける
             this.rigid2D.velocity = new Vector2(0, this.jumpVelocity);
         }
 
         //クリックをやめたら上方向への速度を減速する
-        if(Input.GetMouseButton(0) == false)
+        if (Input.GetMouseButton(0) == false)
         {
-            if(this.rigid2D.velocity.y > 0)
+            if (this.rigid2D.velocity.y > 0)
             {
                 this.rigid2D.velocity *= this.dump;
             }
         }
 
         //デッドラインを超えた場合ゲームオーバーにする
-        if(transform.position.x < this.deadLine)
+        if (transform.position.x < this.deadLine)
         {
             //UIControllerのGameOver関数を呼び出して画面上に「Game Over」と表示する
             GameObject.Find("Canvas").GetComponent<UIController>().GameOver();
 
             //ユニティちゃんを破棄する
             Destroy(gameObject);
+        }
+
+        //右クリックを押したら弾を発射する
+        if (Input.GetMouseButtonDown(1))
+        {
+            Instantiate(amuletPrefab, transform.position, Quaternion.identity);
         }
     }
 }
