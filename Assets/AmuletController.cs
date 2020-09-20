@@ -11,6 +11,9 @@ public class AmuletController : MonoBehaviour
     //得点用テキスト
     private GameObject ghostPointText;
 
+    //爆発用のパーティクル
+    public GameObject ExplosionPrefab;
+
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +39,12 @@ public class AmuletController : MonoBehaviour
     {
         if (collider.gameObject.tag == "ghost")
         {
+            //Explosion関数を実行
+            Explosion();
+            
+            //ScoreController.csのAddScore関数を実行
             ghostPointText.GetComponent<ScoreController>().AddScore(10);
-
-            //パーティクルを再生
-            GetComponent<ParticleSystem>().Play();
-
+            
             //オブジェクトの削除
             Destroy(collider.gameObject);
             Destroy(gameObject);
@@ -50,6 +54,13 @@ public class AmuletController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+    }
+
+    void Explosion()
+    {
+        //爆発用パーティクルの生成
+        Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
 
     }
 }

@@ -7,11 +7,14 @@ public class GhostController : MonoBehaviour
     //おばけの移動速度
     private float speed = -8;
 
-    //消滅位置
-    private float deadLine = -10;
-
     //落ちる速度
     float fallSpeed;
+
+    //x軸の消滅位置
+    int deadLineX = -10;
+
+    //y軸の消滅位置
+    int deadLineY = -6;
 
     // Start is called before the first frame update
     void Start()
@@ -26,18 +29,10 @@ public class GhostController : MonoBehaviour
         transform.Translate(this.speed * Time.deltaTime, -fallSpeed, 0);
 
         //画面外に出たら破棄する
-        if (transform.position.x < this.deadLine)
+        if (transform.position.x < deadLineX || transform.position.y < deadLineY)
         {
             Destroy(gameObject);
         }
     }
 
-    //地面と衝突したら削除
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "ground")
-        {
-            Destroy(gameObject);
-        }
-    }
 }
