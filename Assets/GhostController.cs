@@ -5,7 +5,7 @@ using UnityEngine;
 public class GhostController : MonoBehaviour
 {
     //おばけの移動速度
-    private float speed = -8;
+    [SerializeField] private float speed = -8;
 
     //落ちる速度
     float fallSpeed;
@@ -26,7 +26,8 @@ public class GhostController : MonoBehaviour
     void Update()
     {
         //おばけを移動させる
-        transform.Translate(this.speed * Time.deltaTime, -fallSpeed, 0);
+        //transform.Translate(this.speed * Time.deltaTime, -fallSpeed, 0);
+        transform.Translate(this.speed * Time.deltaTime, 0, 0);
 
         //画面外に出たら破棄する
         if (transform.position.x < deadLineX || transform.position.y < deadLineY)
