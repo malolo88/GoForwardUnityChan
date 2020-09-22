@@ -79,4 +79,5 @@ public class UnityChanController : MonoBehaviour
             Instantiate(amuletPrefab, transform.position, Quaternion.identity);
         }
     }
+
 }

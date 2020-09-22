@@ -17,7 +17,7 @@ public class GhostGenerator : MonoBehaviour
     private float genPosX = 10;
 
     //おばけの生成位置：Y座標
-    private float genPosY = 4;
+    private float genPosY = 5;
 
 
     // Start is called before the first frame update
