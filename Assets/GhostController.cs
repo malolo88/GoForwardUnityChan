@@ -5,10 +5,7 @@ using UnityEngine;
 public class GhostController : MonoBehaviour
 {
     //おばけの移動速度
-    private float speed = -8;
-
-    //落ちる速度
-    float fallSpeed;
+    private float speed = -5;
 
     //x軸の消滅位置
     int deadLineX = -10;
@@ -19,14 +16,13 @@ public class GhostController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.fallSpeed = 0.01f + 0.1f * Random.value;
     }
 
     // Update is called once per frame
     void Update()
     {
         //おばけを移動させる
-        transform.Translate(this.speed * Time.deltaTime, -fallSpeed, 0);
+        transform.Translate(this.speed * Time.deltaTime, 0, 0);
 
         //画面外に出たら破棄する
         if (transform.position.x < deadLineX || transform.position.y < deadLineY)

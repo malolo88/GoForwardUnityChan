@@ -10,15 +10,8 @@ public class GhostGenerator : MonoBehaviour
     //時間計測用の変数
     private float delta = 0;
 
-    //おばけの生成間隔
-    private float span = 4.0f;
-
     //おばけの生成位置：X座標
     private float genPosX = 10;
-
-    //おばけの生成位置：Y座標
-    private float genPosY = 5;
-
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +25,13 @@ public class GhostGenerator : MonoBehaviour
         this.delta += Time.deltaTime;
 
         //span秒以上の時間が経過したかを調べる
-        if (this.delta > this.span)
+        if (this.delta > Random.Range(4.0f, 8.0f))
         {
             this.delta = 0;
 
             //おばけの生成
             GameObject ghost = Instantiate(ghostPrefab) as GameObject;
-            ghost.transform.position = new Vector2(this.genPosX, this.genPosY);
+            ghost.transform.position = new Vector2(this.genPosX, Random.Range(0.0f, 4.5f));
 
         }
     }
