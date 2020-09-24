@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnityChanController : MonoBehaviour
 {
@@ -25,6 +26,16 @@ public class UnityChanController : MonoBehaviour
     // おふだのPrefab
     public GameObject amuletPrefab;
 
+    // ライフ
+    public int m_life = 10;
+
+    // ライフ表示パネル
+    public RectTransform m_lifePanel;
+
+    // ライフ表示のプレハブ
+    public GameObject m_lifeImage;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +43,8 @@ public class UnityChanController : MonoBehaviour
         this.animator = GetComponent<Animator>();
         //Rigidbody2Dのコンポーネントを取得する
         this.rigid2D = GetComponent<Rigidbody2D>();
+
+        RefleshLifeCounter(m_life);
     }
 
     // Update is called once per frame
@@ -82,11 +95,30 @@ public class UnityChanController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "ghost")
+        if (collision.gameObject.tag == "ghost")
         {
-            
+            m_life -= 1;
+            if (m_life < 0)
+            {
+                Debug.Log("Game over");
+            }
+
+            RefleshLifeCounter(m_life);
+        }
+    }
+
+    void RefleshLifeCounter(int lifeCount)
+    {
+        foreach (Transform t in m_lifePanel.transform)  // ライフパネルの下にあるやつ全部消す
+        {
+            Destroy(t.gameObject);
+        }
+
+        for (int i = 0; i < lifeCount; i++)
+        {
+            GameObject go = Instantiate(m_lifeImage);
+            go.transform.SetParent(m_lifePanel);
         }
 
     }
-
 }
