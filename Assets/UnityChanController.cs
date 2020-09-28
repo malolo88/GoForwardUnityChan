@@ -25,6 +25,22 @@ public class UnityChanController : MonoBehaviour
     // おふだのPrefab
     public GameObject amuletPrefab;
 
+    // ライフ
+    public int m_life = 3;
+
+    // ライフ表示パネル
+    public RectTransform m_lifePanel;
+
+    // ライフ表示のプレハブ
+    public GameObject m_lifeImage;
+
+    //ユニティちゃんが消えるパーティクル
+    public GameObject DisappearPrefab;
+
+    //AudioSource型の変数
+    public AudioSource foot;
+    public AudioSource damage;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +48,9 @@ public class UnityChanController : MonoBehaviour
         this.animator = GetComponent<Animator>();
         //Rigidbody2Dのコンポーネントを取得する
         this.rigid2D = GetComponent<Rigidbody2D>();
+
+        RefleshLifeCounter(m_life);
+
     }
 
     // Update is called once per frame
@@ -45,7 +64,7 @@ public class UnityChanController : MonoBehaviour
         this.animator.SetBool("isGround", isGround);
 
         //ジャンプ状態のときにはボリュームを0にする
-        GetComponent<AudioSource>().volume = (isGround) ? 1 : 0;
+        foot.volume = (isGround) ? 1 : 0;
 
         //着地状態でクリックされた場合
         if (Input.GetMouseButtonDown(0) && isGround)
@@ -71,6 +90,7 @@ public class UnityChanController : MonoBehaviour
 
             //ユニティちゃんを破棄する
             Destroy(gameObject);
+
         }
 
         //右クリックを押したら弾を発射する
@@ -82,11 +102,49 @@ public class UnityChanController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        //おばけに当たったらライフを1減らす
         if(collision.gameObject.tag == "ghost")
         {
-            
+            m_life -= 1;
+            GetComponent<ParticleSystem>().Play();　//ユニティちゃんのパーティクルを再生
+            damage.Play();
+            Destroy(collision.gameObject); //おばけの削除
+
+            //ライフが0になったらゲームオーバー
+            if (m_life == 0)
+            {
+                //ユニティちゃんとおばけを削除
+                Destroy(gameObject);
+                Destroy(collision.gameObject);
+                Instantiate(DisappearPrefab, transform.position, Quaternion.identity); //パーティクル再生
+
+                //UIControllerのGameOver関数を呼び出して画面上に「Game Over」と表示する
+                GameObject.Find("Canvas").GetComponent<UIController>().GameOver();
+
+            }
+
+            RefleshLifeCounter(m_life);
         }
 
     }
+
+    //ライフカウンターを新しくする
+    void RefleshLifeCounter(int lifeCount)
+    {
+        // ライフパネルの下にあるオブジェクトを全部消す
+        foreach (Transform t in m_lifePanel.transform)  
+        {
+            Destroy(t.gameObject);
+        }
+
+        //ライフが残ってたら作成する
+        for (int i = 0; i < lifeCount; i++)
+        {
+            GameObject go = Instantiate(m_lifeImage);
+            go.transform.SetParent(m_lifePanel);
+        }
+
+    }
+    
 
 }

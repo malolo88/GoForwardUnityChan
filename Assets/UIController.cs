@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Threading;
 
 public class UIController : MonoBehaviour
 {
@@ -20,8 +21,11 @@ public class UIController : MonoBehaviour
 
     //ゲームオーバーの判定
     private bool isGameOver = false;
-    
-    
+
+    //ゲームオーバー後の経過時間
+    private float waitTime = 0.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,11 +49,12 @@ public class UIController : MonoBehaviour
         //ゲームオーバーになった場合
         if(this.isGameOver == true)
         {
-            //クリックされたらシーンをロードする
-            if(Input.GetMouseButtonDown(0))
+            waitTime += Time.deltaTime;
+
+            //3秒経過したらResul画面に遷移する
+            if(waitTime >= 3.0f)
             {
-                //SampleSceneを読み込む
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("ResultScene");
             }
         }
         
