@@ -25,6 +25,8 @@ public class UIController : MonoBehaviour
     //ゲームオーバー後の経過時間
     private float waitTime = 0.0f;
 
+    bool m_isGameStarted = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,32 +34,35 @@ public class UIController : MonoBehaviour
         //シーンビューからオブジェクトの実体を検索する
         this.gameOverText = GameObject.Find("GameOver");
         this.runLengthText = GameObject.Find("RunLength");
+        runLengthText.GetComponent<Text>().text = "";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(this.isGameOver == false)
+        if (m_isGameStarted)
         {
-            //走った距離を更新する
-            this.len += this.speed * Time.deltaTime;
-
-            //走った距離を表示する
-            this.runLengthText.GetComponent<Text>().text = "Distance: " + len.ToString("F2") + "m";
-        }
-
-        //ゲームオーバーになった場合
-        if(this.isGameOver == true)
-        {
-            waitTime += Time.deltaTime;
-
-            //3秒経過したらResul画面に遷移する
-            if(waitTime >= 3.0f)
+            if (this.isGameOver == false)
             {
-                SceneManager.LoadScene("ResultScene");
+                //走った距離を更新する
+                this.len += this.speed * Time.deltaTime;
+
+                //走った距離を表示する
+                this.runLengthText.GetComponent<Text>().text = "Distance: " + len.ToString("F2") + "m";
+            }
+
+            //ゲームオーバーになった場合
+            if (this.isGameOver == true)
+            {
+                waitTime += Time.deltaTime;
+
+                //3秒経過したらResul画面に遷移する
+                if (waitTime >= 3.0f)
+                {
+                    SceneManager.LoadScene("ResultScene");
+                }
             }
         }
-        
     }
 
     public void GameOver()
@@ -65,5 +70,10 @@ public class UIController : MonoBehaviour
         //ゲームオーバーになったときに、画面上にゲームオーバーを表示する
         this.gameOverText.GetComponent<Text>().text = "Game Over";
         this.isGameOver = true;
+    }
+
+    public void StartGame()
+    {
+        m_isGameStarted = true;
     }
 }

@@ -10,7 +10,7 @@ public class BackgroundController : MonoBehaviour
     private float deadLine = -16;
     //背景開始位置
     private float startLine = 15.8f;
-    
+    bool m_isScrolling = false;
     
     // Start is called before the first frame update
     void Start()
@@ -21,13 +21,26 @@ public class BackgroundController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //背景を移動する
-        transform.Translate(this.scrollSpeed * Time.deltaTime, 0, 0);
-
-        //画面外に出たら、画面右端に移動する
-        if(transform.position.x < this.deadLine)
+        if (m_isScrolling)
         {
-            transform.position = new Vector2(this.startLine, 0);
+            //背景を移動する
+            transform.Translate(this.scrollSpeed * Time.deltaTime, 0, 0);
+
+            //画面外に出たら、画面右端に移動する
+            if (transform.position.x < this.deadLine)
+            {
+                transform.position = new Vector2(this.startLine, 0);
+            }
         }
+    }
+
+    public void StartScroll()
+    {
+        m_isScrolling = true;
+    }
+
+    public void StopScroll()
+    {
+        m_isScrolling = false;
     }
 }
