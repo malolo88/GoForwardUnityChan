@@ -85,7 +85,7 @@ public class UnityChanController : MonoBehaviour
         //デッドラインを超えた場合ゲームオーバーにする
         if (transform.position.x < this.deadLine)
         {
-            //UIControllerのGameOver関数を呼び出して画面上に「Game Over」と表示する
+            //UIControllerのGameOver関数を呼び出して画面上に「ゲームオーバー」と表示する
             GameObject.Find("Canvas").GetComponent<UIController>().GameOver();
 
             //ユニティちゃんを破棄する
@@ -118,7 +118,7 @@ public class UnityChanController : MonoBehaviour
                 Destroy(collision.gameObject);
                 Instantiate(DisappearPrefab, transform.position, Quaternion.identity); //パーティクル再生
 
-                //UIControllerのGameOver関数を呼び出して画面上に「Game Over」と表示する
+                //UIControllerのGameOver関数を呼び出して画面上に「ゲームオーバー」と表示する
                 GameObject.Find("Canvas").GetComponent<UIController>().GameOver();
 
             }

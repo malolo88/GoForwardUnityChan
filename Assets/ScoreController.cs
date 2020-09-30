@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreController : MonoBehaviour
 {
-    int score;
+    public static int score;
     UnityEngine.UI.Text scoreText;
 
     // Start is called before the first frame update
@@ -21,7 +21,13 @@ public class ScoreController : MonoBehaviour
 
     public void AddScore(int score)
     {
-        this.score += score;
-        scoreText.text = "Score: " + this.score.ToString();
+        ScoreController.score += score;
+        scoreText.text = "得点: " + ScoreController.score.ToString() + "点";
+    }
+
+    //得点を共有する関数
+    public static float GetScore()
+    {
+        return score;
     }
 }
