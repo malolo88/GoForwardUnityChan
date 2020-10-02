@@ -5467,7 +5467,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 45df1a02f9a90b04a80ee65659e5f065, type: 3}
     m_FontSize: 93
     m_FontStyle: 0
     m_BestFit: 0
@@ -5695,7 +5695,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 45df1a02f9a90b04a80ee65659e5f065, type: 3}
     m_FontSize: 300
     m_FontStyle: 1
     m_BestFit: 0
@@ -5922,7 +5922,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 45df1a02f9a90b04a80ee65659e5f065, type: 3}
     m_FontSize: 190
     m_FontStyle: 0
     m_BestFit: 0
@@ -6318,7 +6318,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -6485,6 +6485,8 @@ PlayableDirector:
     value: {fileID: 859407196}
   - key: {fileID: 4830615223772245860, guid: 9da5a35eb8313714dbb01abec4b7f7b9, type: 2}
     value: {fileID: 169341642}
+  - key: {fileID: 1453520351897550251, guid: 9da5a35eb8313714dbb01abec4b7f7b9, type: 2}
+    value: {fileID: 593177705}
   m_ExposedReferences:
     m_References: []
 --- !u!1001 &2018885135
@@ -6626,7 +6628,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 45df1a02f9a90b04a80ee65659e5f065, type: 3}
     m_FontSize: 93
     m_FontStyle: 0
     m_BestFit: 0
